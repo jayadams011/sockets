@@ -1,34 +1,27 @@
 import socket
 from datetime import datetime
 
+PORT = 3000
+
 sock = socket.socket(
     socket.AF_INET,
     socket.SOCKET_STREAM,
-    socket.IPPROTO_TCP)
-sock
-address = ('127.0.0.1', 3000)
-buffer_length = *
-message_complete = False
-while not message_complete:
-    part = conn.recv(buffer_length)
-    print(part.decode('utf8'))
-    if len(part) < buffer_length:
-        break
-message = 'thanks for the note'
-while not message_complete:
-    part = conn.recv(buffer_length)
-    print(part.decode('utf8'))
-    if len(part) < buffer_length:
-        break
+    socket.IPPROTO_TCP
+)
+sock.bind(('127.0.0.1', 3000))
+sock.listen()
+recv_buffer = 8
+
+while True:
+    try:
+        conn, addr = sock.accept()
+        message = 'We have lift off'
+
+        while True:
+            part = conn.recv(recv_buffer)
+            message = '[{}] Echoed: 'format(dt.now()) + message
+            if len(part) < recv_buffer:
+                break
+      
 conn.close()
 sock.close()
-
-
-PORT = 3000
-print('--- Starting server on port {} at {} ---'.format(PORT, dt.now()))
-
-sock = socket.socket(
-        socket.AF_INET,
-        socket.SOCK_STREAM,
-        socket.IPPROTO_TCP
-)
