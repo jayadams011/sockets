@@ -30,3 +30,7 @@ with socket.socket(
 
     print('---Stopping sever on port {} at {}---'.format(PORT, dt.now()))
     conn.sendall(msg_from_client.encode('utf8'))
+
+except KeyboardInterrupt:
+        print('Stopping server')
+        exit()
